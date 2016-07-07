@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen">
+        <!-- <link rel="stylesheet" href="/css/cssTransitions.css" type="text/css" media="screen"> -->
+        <meta charset="utf-8">
+        <meta name="author" content="Andrew Gohr">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="viewport" content="height=device-height, initial-scale=1, maximum-scale=1">
+        <meta name="description" content="home page for therootuser.com">
+        <title>Home | therootuser.info</title>
+        <script type="text/javascript">
+            function generate() {
+                var table = Array.matrix(100, 100, 0);
+
+                var count = 0;
+                for (var j = 0; j < 100; j++) {
+                    for (var i = 0; i < 100; i++) {
+                        count++;
+                        table[i][j] = count;
+                    }
+                    save(JSON.stringify(table));
+                    document.getElementById("output").innerHTML = JSON.stringify(table);
+
+                }
+            }
+            Array.matrix = function (numrows, numcols, initial) {
+                var arr = {};
+                for (var i = 0; i < numrows; ++i) {
+                    var columns = {};
+                    for (var j = 0; j < numcols; ++j) {
+                        columns[j] = initial;
+                    }
+                    arr[i] = columns;
+                }
+                return arr;
+            }
+            function save(toSave) {
+                if (typeof (Storage) !== "undefined") {
+                    // Store
+                    localStorage.setItem("table", toSave);
+                } else {
+                    document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+                }
+            }
+            function load() {
+                document.getElementById("output").innerHTML = localStorage.getItem("table");
+            }
+        </script>
+    </head>
+    <body>
+        <div>
+            <nav role="navigation">
+  <div><a href="/">Home</a>
+    <a href="/pages/about.php">About</a>
+    <a href="/pages/linux/linux.php">Linux</a>
+    <a href="/pages/windows/windows.php">Windows</a>
+    <a href="/pages/hardware/hardware.php">Hardware</a>
+    <a href="/pages/assignments.php">Assignments</a>
+  </div>
+</nav><!--nav-->
+            <header role="banner">
+  <h1>Therootuser.info</h1>
+</header><!--header-->
+            <main role="main">
+
+                <button onclick="generate();">generate table</button>
+                <button onclick="load();">load table</button>
+
+                <div id="output"></div>
+            </main>
+            <footer>
+                <script src="/js/analytics.js"></script><!--footer-->
+                Last updated: 25 June, 2016            </footer>
+        </div>
+    </body>
+</html>
