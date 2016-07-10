@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AJAX - Template Example</title>
+	<style>
+		div#nav {
+			float: left;
+			margin-right: 10px;
+		}
+	</style>
+	<script>
+	function loadPage(pageName) {
+		var filename = pageName + ".ajx";
+		var xhttp = new XMLHttpRequest();		//create the handler for the AJAX requests.
+		xhttp.open("GET", filename, false);	//don't use async so simplify this.
+		xhttp.send();						//send the request.
+		if(xhttp.status == 200) {			//valid page found, display it.
+			document.getElementById("page").innerHTML = xhttp.responseText;
+		} else {							//page not found, display error instead.
+			document.getElementById("page").innerHTML = "That page could not be found.";
+		}
+	}
+</script>
+</head>
+<body onload="javascript: loadPage('home');">
+	<h1>AJAX - Template Example</h1>
+	<div id="nav">
+		<a href="#" onclick="javascript: loadPage('home');">Home</a><br />
+		<a href="#" onclick="javascript: loadPage('testing');">Testing Link</a><br />
+		<a href="#" onclick="javascript: loadPage('broken');">Broken Link</a>
+	</div>
+	<div id="page">
+		
+	</div>
+</body>
+</html>
