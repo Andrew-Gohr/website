@@ -1,0 +1,29 @@
+//this is json storage and retreval of an individual and their respective timers in an array
+^^^^^
+^^^^^
+^^^^^
+
+function getIndividual(name){
+    
+  var x = JSON.parse(localStorage.getItem(name));
+    return x;
+
+}
+
+function saveIndividual(name, individual){
+    
+    localStorage.setItem(name, JSON.stringify(individual));
+    
+}
+
+function isAvailable(name){
+        return localStorage.getItem(name) === null;
+}
+
+function getKeys(){
+   var x;
+    for ( var i = 0, len = localStorage.length; i < len; ++i ) {
+        x[i] = localStorage.getItem( localStorage.key( i ) ) ;
+}
+    return x;
+}
