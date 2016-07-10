@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DOM Example</title>
+	<script>
+		function createObject(type) {
+			if(type == "break") {	//insert line break
+				var ele = document.createElement("br");
+			} else if(type == "link") {	//create a link
+				var ele = document.createElement("a");	//create the parent node
+				ele.href = "http://www.google.com";	//set the href property
+				ele.target = "_blank";				//set the target property
+				var text = document.createTextNode("Link to Google");	//create the innerHTML element
+				ele.appendChild(text);				//append the innerHTML to the parent node
+			} else if(type == "button") {	//add a button
+				var ele = document.createElement("input");
+				ele.type = "button";
+				ele.value = "Clear All";
+				ele.addEventListener("click", clearObjects);	//create an onclick event
+			} else if(type == "image") {
+				var ele = document.createElement("img");
+				ele.src = "https://developer.chrome.com/extensions/examples/api/idle/idle_simple/sample-128.png";
+			} else if(type == "header") {
+				var ele = document.createElement("h1");
+				var text = document.createTextNode("This is a sample header");
+				ele.appendChild(text);
+			}
+			
+			if(ele) {	//new element successfully created, time to append it
+				document.getElementById("demoArea").appendChild(ele);
+				if(type != "break") {
+					createObject("break");	//add a line break
+				}
+			} else {	//element was not created, display error
+				alert("Error! The element could not be created!");
+			}
+		}
+		
+		function clearObjects() {
+			document.getElementById("demoArea").innerHTML = "";
+		}
+	</script>
+</head>
+<body>
+	This is an example of using DOM to create and delete elements within a loaded
+	webpage. Use the buttons below to work the example.<br /><br />
+	<input type="button" value="Create Link" onclick="createObject('link')">
+	<input type="button" value="Create Button" onclick="createObject('button');">
+	<input type="button" value="Load Image" onclick="createObject('image')">
+	<input type="button" value="Add Header" onclick="createObject('header')">
+	
+	<div id="demoArea"></div>
+</body>
+</html>
